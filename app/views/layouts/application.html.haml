@@ -5,7 +5,7 @@
 	= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' 
 	= csrf_meta_tags 
 
-%body 
+%body
 	- Category.all.each do | category |
 		= link_to category.name, jobs_path(category: category.name)
- 	= yield
+	= yield
