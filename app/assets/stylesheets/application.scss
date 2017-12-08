@@ -1,9 +1,3 @@
-/*// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"*/
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-
-
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -20,3 +14,98 @@
  *= require_tree .
  *= require_self
  */
+
+/*// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"*/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+
+* {
+	box-string: border-box;
+}
+
+html {
+	height: 100%
+}
+
+body {
+	height: 100%; 
+	background: gray;
+	font-family: 'Lato', sans-serif; 
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.navbar-default {
+	background-color: white;
+	border-radius: 0;
+	height: 80px;
+	padding: 15px 0;
+	boarder: none;
+}
+
+.navbar-brand {
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	font-size: 2em;
+	font-weight: 300;
+	color: #1D976C !important;
+}
+
+#jobs {
+	.job {
+		padding: 1em 0;
+		border-bottom: 1px solid rgba(250,250,250, 0.5);
+		h2 {
+			font-size: 2em;
+			font-weight: 300;
+			margin-bottom: 0;
+			color: white;
+			a {
+				color: white;
+			}
+		}
+		p {
+			color: rgba(250,250,250, 0.5);
+		}
+	}
+}
+
+#links {
+	margin-top: 2em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
