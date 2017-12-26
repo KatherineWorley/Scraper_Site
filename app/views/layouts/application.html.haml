@@ -1,6 +1,6 @@
 %html
 %head
-	%title Dev Jobs
+	%title Developer Careers
 	= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
 	= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' 
 	= csrf_meta_tags 
@@ -8,7 +8,7 @@
 %body
 	%nav.navbar.navbar-default
 		.container
-			.navbar-brand Dev Jobs
+			.navbar-brand Developer Career
 			%ul.nav.navbar-nav
 				%li=link_to "All Jobs", root_path
 				- Category.all.each do | category |
