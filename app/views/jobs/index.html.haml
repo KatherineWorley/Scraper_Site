@@ -1,4 +1,9 @@
 #jobs
 	- @jobs.each do |job|
 		.job
+			%h2= link_to job.title.titleize, job.url, target: "_blank"
+			
+#jobs
+	- @craig_jobs.each do |job|
+		.job
 			%h2= link_to job.text.titleize, job['href'], target: "_blank"

@@ -8,5 +8,11 @@
 
 
 10.times {
-	User.create(JobTitle: Full Stack Web Developer, Category: Fulltime, JobDescription: HTML / CSS / JS. You'll work with our award-winning designers and back end developers to create custom websites. You'll write beautiful HTML and CSS to bring Photoshop files to life. And you will optimize sites for usability, search engines and accessibility, and update existing sites. YourCompany: Robert Half Link to Job: https://www.roberthalf.com/)
+	User.create(JobTitle: 'Full Stack Web Developer', Category: 'Fulltime', JobDescription: "HTML / CSS / JS. You'll work with our award-winning designers and back end developers to create custom websites. You'll write beautiful HTML and CSS to bring Photoshop files to life. And you will optimize sites for usability, search engines and accessibility, and update existing sites. YourCompany: Robert Half Link to Job: https://www.roberthalf.com/")
 }
+
+CATEGORIES = ["Full-Time", "Part-Time", "Contract", "Employee's Choice"]
+
+CATEGORIES.each do |cat|
+	Category.create!({name: cat})
+end

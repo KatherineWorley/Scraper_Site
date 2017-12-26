@@ -4,14 +4,14 @@ class JobsController < ApplicationController
 
 
 	def index
-		@jobs = Job.scraper
+		@craig_jobs = Job.scraper(params[:category].presence)
 
-		# if params[:category].blank?
-		# 	@jobs = Job.all.order("created_at DESC")
-		# else
-		# 	@category_id = Category.find_by(name: params[:category]).id 
-		# 	@jobs = Job.where(category_id: @category_id).order("created_at DESC") 
-		# end 
+		if params[:category].blank?
+			@jobs = Job.all.order("created_at DESC")
+		else
+			@category_id = Category.find_by(name: params[:category]).id 
+			@jobs = Job.where(category_id: @category_id).order("created_at DESC") 
+		end 
 	end
 
 	def show
@@ -27,7 +27,7 @@ class JobsController < ApplicationController
 		if @job.save
 			redirect_to @job 
 		else
-			render "New"
+			render "new"
 		end 
 	end
 
@@ -38,7 +38,7 @@ class JobsController < ApplicationController
 		if @job.update(jobs_params)
 			redirect_to @job
 		else
-			render "Edit"
+			render "edit_job"
 		end 	
 	end
 
