@@ -1,58 +1,37 @@
-class JobsController < ApplicationController
+class Job < ApplicationRecord
+	include HTTParty
+	include Nokogiri
 
-	before_action :find_job, only: [:show, :edit, :update, :destroy]
+	belongs_to :category
 
+	attr_reader :category_parser
 
-	def index
-		@craig_jobs = Job.scraper(params[:category].presence)
-
-		if params[:category].blank?
-			@jobs = Job.all.order("created_at DESC")
-		else
-			@category_id = Category.find_by(name: params[:category]).id 
-			@jobs = Job.where(category_id: @category_id).order("created_at DESC") 
-		end 
-	end
-
-	def show
-	end
-
-	def new
-		@job = Job.new
-	end
-
-	def create
-		@job = Job.new(jobs_params)
-
-		if @job.save
-			redirect_to @job 
-		else
-			render "new"
-		end 
-	end
-
-	def edit
-	end 
-
-	def update
-		if @job.update(jobs_params)
-			redirect_to @job
-		else
-			render "edit_job"
-		end 	
-	end
-
-	def destroy
-		@job.destroy
-		redirect_to root_path
+	def self.scraper(cat_type=nil)
+		url = "https://miami.craigslist.org/search/sof"
+		if cat_type.present?
+			@options = { query: {
+					employment_type: Job.category_parser(cat_type)
+				} 
+			}
+		end	
+		response = HTTParty.get(url, (@options.presence || {}))
+		dom = Nokogiri::HTML(response.body)
+		return dom.css("a.hdrlnk")
 	end
 
 	private
-	def jobs_params
-		params.require(:job).permit(:title, :description, :company, :url, :category_id)
-	end
-
-	def find_job
-		@job = Job.find(params[:id])
-	end
+		def self.category_parser(cat_type)
+			case cat_type
+			when "Full-Time"
+				return 1
+			when "Part-Time"
+				return 2
+			when "Contract"
+				return 3
+			when "Employee's Choice"
+				return 4
+			else
+				return 1
+			end
+		end
 end
